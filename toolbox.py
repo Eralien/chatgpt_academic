@@ -82,12 +82,13 @@ def write_results_to_file(history, file_name=None):
     os.makedirs('./gpt_log/', exist_ok=True)
     with open(f'./gpt_log/{file_name}', 'w', encoding = 'utf8') as f:
         f.write('# chatGPT 分析报告\n')
+        f.write(f'time: {time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())}\n')
         for i, content in enumerate(history):
             try:    # 这个bug没找到触发条件，暂时先这样顶一下
                 if type(content) != str: content = str(content)
             except:
                 continue
-            if i%2==0: f.write('## ')
+            if i % 2 == 0: f.write('### ')
             f.write(content)
             f.write('\n\n')
     res = '以上材料已经被写入' + os.path.abspath(f'./gpt_log/{file_name}')

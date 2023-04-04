@@ -59,7 +59,7 @@ def 解析项目本身(txt, top_p, temperature, chatbot, history, systemPromptTx
 
         prefix = "接下来请你分析自己的程序构成，别紧张，" if index==0 else ""
         i_say = prefix + f'请对下面的程序文件做一个概述文件名是{fp}，文件代码是 ```{file_content}```'
-        i_say_show_user = prefix + f'[{index}/{len(file_manifest)}] 请对下面的程序文件做一个概述: {os.path.abspath(fp)}'
+        i_say_show_user = prefix + f'[{index}/{len(file_manifest)}] 请对下面的程序文件做一个概述: {fp}'
         chatbot.append((i_say_show_user, "[Local Message] waiting gpt response."))
         yield chatbot, history, '正常'
 
