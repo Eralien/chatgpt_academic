@@ -1,7 +1,7 @@
 FROM python:3.11
 
 RUN python3 -m pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple
-RUN python3 -m pip install gradio requests[socks] mdtex2html
+RUN python3 -m pip install gradio requests[socks] mdtex2html pymupdf
 
 COPY . /gpt
 WORKDIR /gpt
