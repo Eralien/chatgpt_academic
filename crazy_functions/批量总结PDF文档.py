@@ -139,10 +139,7 @@ def 批量总结PDF文档(txt, top_p, temperature, chatbot, history, systemPromp
         return
 
     # 搜索需要处理的文件清单
-    file_manifest = [f for f in glob.glob(f'{project_folder}/**/*.pdf', recursive=True)] # + \
-                    # [f for f in glob.glob(f'{project_folder}/**/*.tex', recursive=True)] + \
-                    # [f for f in glob.glob(f'{project_folder}/**/*.cpp', recursive=True)] + \
-                    # [f for f in glob.glob(f'{project_folder}/**/*.c', recursive=True)]
+    file_manifest = [f for f in glob.glob(f'{project_folder}/**/*.pdf', recursive=True)] if os.path.isdir(project_folder) else [project_folder]
     
     # 如果没找到任何文件
     if len(file_manifest) == 0:
