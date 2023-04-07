@@ -1,4 +1,4 @@
-from predict import predict_no_ui
+from request_llm.bridge_chatgpt import predict_no_ui
 from toolbox import CatchException, report_execption, write_results_to_file, predict_no_ui_but_counting_down
 fast_debug = False
 
@@ -119,8 +119,8 @@ def 解析一个C项目的头文件(txt, top_p, temperature, chatbot, history, s
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到本地项目或无权访问: {txt}")
         yield chatbot, history, '正常'
         return
-    file_manifest = [f for f in glob.glob(f'{project_folder}/**/*.h', recursive=True)] # + \
-                    # [f for f in glob.glob(f'{project_folder}/**/*.cpp', recursive=True)] + \
+    file_manifest = [f for f in glob.glob(f'{project_folder}/**/*.h', recursive=True)]  + \
+                    [f for f in glob.glob(f'{project_folder}/**/*.hpp', recursive=True)] #+ \
                     # [f for f in glob.glob(f'{project_folder}/**/*.c', recursive=True)]
     if len(file_manifest) == 0:
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.h头文件: {txt}")
@@ -141,6 +141,7 @@ def 解析一个C项目(txt, top_p, temperature, chatbot, history, systemPromptT
         return
     file_manifest = [f for f in glob.glob(f'{project_folder}/**/*.h', recursive=True)]  + \
                     [f for f in glob.glob(f'{project_folder}/**/*.cpp', recursive=True)] + \
+                    [f for f in glob.glob(f'{project_folder}/**/*.hpp', recursive=True)] + \
                     [f for f in glob.glob(f'{project_folder}/**/*.c', recursive=True)]
     if len(file_manifest) == 0:
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.h头文件: {txt}")
